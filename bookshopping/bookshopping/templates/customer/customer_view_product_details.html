@@ -1,0 +1,72 @@
+{% extends 'customer\layouts\base.html' %}
+{% load static %}
+{% block title %}<i class="fas fa-product-hunt    "></i> Details{% endblock title %}
+{% block content %}
+    
+    <!-- Page wrapper for sticky footer -->
+    <!-- Wraps everything except footer to push footer to the bottom of the page if there is little content -->
+    <main class="page-wrapper">
+
+        
+        <!-- START Navbar -->
+        {% include 'customer\layouts\navbar.html' %}
+        <!-- END Navbar -->
+
+        <nav class="bg-secondary mb-3" aria-label="breadcrumb">
+            <div class="container">
+            <ol class="breadcrumb breadcrumb-alt mb-0">
+                <li class="breadcrumb-item">
+                <a href="{% url 'customer_home' %}"><i class="ci-home"></i></a>
+                </li>
+                <li class="breadcrumb-item" aria-current="page"><a href="{% url 'customer_view_products' %}">View Product</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Product Details</li>
+            </ol>
+            </div>
+        </nav>
+
+        <!-- Page container -->
+      <section class="container pt-3 pt-lg-4 pb-5 pb-lg-6">
+        <div class="row pb-2 pb-lg-0">
+
+          <!-- Content -->
+          <div class="col-lg-10 mx-auto">
+            <div class="d-flex align-items-center justify-content-between mb-4 pb-sm-4">
+              <h1 class="h2 mb-0">Product Details</h1>
+              <span><b>Product ID: {{prod.id}}</b></span>
+            </div>
+            {% if prod %}
+                <!-- Review -->
+                <div class="mb-4 pb-4 border-bottom">
+                  
+                  <div class="row">
+                    <div class="col-md-3 col-sm-4 mb-sm-0 mb-3">
+                      <div>
+                        <img src="{{prod.image.url}}" alt="Product Image" style="background-size:cover; height:150px; width:150px;">
+                      </div>
+                    </div>
+                    <div class="col">
+                      <p class="mb-3"><b>Product ID:</b> {{prod.id}}</p>
+                      <p class="mb-3"><b>Product Name:</b> {{prod.product_name}}</p>
+                      <p class="mb-3"><b>Product Description:</b> {{prod.description}}</p>
+                      <p class="mb-3"><b>Price:</b> &#8377; {{prod.price}}</p>
+                      <p class="mb-3"><b>Quantity:</b> {{prod.quantity}}</p>
+                    </div>
+                  </div>
+                </div>
+            {% else %}
+              <h5 class="text-center">No Product Items Available</h5>
+            {% endif %}
+
+            
+
+            
+          </div>
+        </div>
+      </section>
+
+
+
+</main>
+
+
+{% endblock content %}

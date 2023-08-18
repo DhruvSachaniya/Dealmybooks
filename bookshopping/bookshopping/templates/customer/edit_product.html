@@ -1,0 +1,124 @@
+{% extends 'customer\layouts\base.html' %}
+{% load static %}
+{% block title %}Edit Products{% endblock title %}
+{% block links %}
+  <link rel="stylesheet" media="screen" href="{% static 'customer/vendor/simplebar/dist/simplebar.min.css' %}"/>
+  <link rel="stylesheet" media="screen" href="{% static 'customer/vendor/nouislider/dist/nouislider.min.css' %}"/>
+{% endblock links %}
+{% block content %}
+<main class="page-wrapper">
+
+    <!-- START Navbar -->
+    {% include 'customer\layouts\navbar.html' %}
+    <!-- END Navbar -->
+
+    <nav class="bg-secondary mb-3" aria-label="breadcrumb">
+        <div class="container">
+        <ol class="breadcrumb breadcrumb-alt mb-0">
+            <li class="breadcrumb-item">
+            <a href="{% url 'customer_home' %}"><i class="ci-home"></i></a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'customer_view_products' %}">View Product</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Edite Product</li>
+        </ol>
+        </div>
+    </nav>
+
+
+    <!-- Page container -->
+    <section class="container pt-3 pt-lg-4 pb-lg-6 h-100">
+    <div class="row pb-2 pb-lg-0">
+        {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+            <span class="fw-bold">{{message}}</span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+        </div>
+        <!-- Content -->
+        <div class="col-lg-6 mx-auto my-auto">
+
+                    <form action="/customer/update_product/{{prod.id}}/" method="post" enctype="multipart/form-data" novalidate>
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="mb-4 col-sm-12">
+                                <label class="form-label-lg fname">Product Name</label>
+                                <input type="text" name="pname" class="form-control" id="pname" value="{{prod.product_name}}" placeholder="Your Product" required>
+                                    <span class="fs-sm text-danger"></span>
+                            </div>
+                            <div class="mb-3 col-sm-6">
+                                <label class="form-label-lg fname">Select Category</label>
+                                <select class="form-select" name="category" id="category">
+                                    <option disabled="">---Select Category---</option>
+                                    {% for cat in cate %}
+                                    <option value="{{cat.id}}" {% if cat == prod.category %}selected{% endif %}>{{cat.category_name}}</option>
+                                    {% endfor %}
+                                </select>                             
+                                    <label class="small text-danger"></label>                                
+                            </div>
+
+                            <!-- category input -->
+                            <div class="mb-3 col-sm-6">
+                                <label class="form-label-lg fname">Select Subcategory</label>
+                                <select class="form-select" name="subcategory" id="subcategory">
+                                    <option disabled="">---Select Subcategory---</option>
+                                    {% for subcat in subcate %}
+                                    <option value="{{subcat.id}}" {% if subcat == prod.subcategory %}selected{% endif %}>{{subcat.subcategory_name}}</option>
+                                    {% endfor %}
+                                </select>                             
+                                    <label class="small text-danger"></label>                                
+                            </div>
+        
+
+                            <!-- Address input -->
+                            <div class="mb-4 col-sm-12">
+                                <label for="email-input" class="form-label-lg email">Description</label>
+                                <input type="text" class="form-control" id="description" name="description" value="{{prod.description}}" placeholder="Your Description" required>
+                                    <span class="fs-sm text-danger"></span>
+                                <span class="fs-sm text-danger d-block" id="emailerr"></span>
+                            </div>
+
+                            <!-- Price Input -->
+                            <div class="mb-4">
+                                <label for="pass-input" class="form-label-lg">Price</label>
+                                <div class="password-toggle">
+                                    <input type="number" name="price" class="form-control" id="price" value="{{prod.price}}" placeholder="Your Price" required>
+                                </div>
+                            
+                                    <span class="fs-sm text-danger"></span>
+
+                            </div>
+                            <!-- Quantity Input -->
+                            <div class="mb-4">
+                                <label for="pass-input" class="form-label-lg">Quantity</label>
+                                <div class="password-toggle">
+                                    <input type="number" name="quantity" class="form-control" id="quantity" value="{{prod.quantity}}" placeholder="Your Quantity" required>
+                                </div>
+                            
+                                    <span class="fs-sm text-danger"></span>
+
+                            </div>
+                            
+                            <!-- File Input -->
+                            <div class="mb-4">
+                                <label for="pass-input" class="form-label-lg">Image</label>
+                                <div class="password-toggle">
+                                    <input type="file" name="file" value="{{prod.image.url}}" class="form-control" id="file" required>
+                
+                                </div>
+                                    <span class="fs-sm text-danger"></span>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary d-block w-100">Update</button>
+                        </div>
+                    </form>
+                
+        </div>
+    </div>
+    </section>
+
+
+</main>
+{% endblock content%}

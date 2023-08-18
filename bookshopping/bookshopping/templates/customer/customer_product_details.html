@@ -1,0 +1,242 @@
+{% extends 'customer\layouts\base.html' %}
+{% load static %}
+{% block title %}Product Details{% endblock title %}
+{% block links %}
+  <link rel="stylesheet" media="screen" href="{% static 'customer/vendor/simplebar/dist/simplebar.min.css' %}"/>
+  <link rel="stylesheet" media="screen" href="{% static 'customer/vendor/nouislider/dist/nouislider.min.css' %}"/>
+{% endblock links %}
+{% block content %}
+
+<!-- Page wrapper for sticky footer -->
+    <!-- Wraps everything except footer to push footer to the bottom of the page if there is little content -->
+    <main class="page-wrapper">
+
+        
+      <!-- START Navbar -->
+      {% include 'customer\layouts\navbar.html' %}
+      <!-- END Navbar -->
+
+      <nav class="bg-secondary mb-3" aria-label="breadcrumb">
+          <div class="container">
+          <ol class="breadcrumb breadcrumb-alt mb-0">
+              <li class="breadcrumb-item">
+              <a href="{% url 'customer_home' %}"><i class="ci-home"></i></a>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">Product Details</li>
+          </ol>
+          </div>
+      </nav>
+
+      <section class="container">
+        <div class="row">
+          {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                        <span class="fw-bold">{{message}}</span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+      </section>
+      
+      <!-- Page title -->
+      <section class="container d-md-flex align-items-center justify-content-between py-3 py-md-4 mb-3">
+        
+        <h1 class="mb-2 mb-md-0"></h1>
+      </section>
+
+      <section class="container mb-lg-5">
+
+        <!-- Nav tabs -->
+        {% comment %} <div data-simplebar="init" data-simplebar-auto-hide="false"><div class="simplebar-wrapper" style="margin: 0px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: 0px; bottom: 0px;"><div class="simplebar-content-wrapper" style="height: auto; overflow: hidden;"><div class="simplebar-content" style="padding: 0px;">
+          <ul class="nav nav-tabs flex-nowrap text-nowrap" role="tablist">
+            <li class="nav-item">
+              <a href="#info" class="nav-link active" data-bs-toggle="tab" role="tab" aria-selected="true">General info</a>
+            </li>
+          </ul>
+        </div></div></div></div><div class="simplebar-placeholder" style="width: auto; height: 69px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar simplebar-visible" style="width: 0px; display: none;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: hidden;"><div class="simplebar-scrollbar simplebar-visible" style="height: 0px; display: none;"></div></div></div> {% endcomment %}
+
+        <div class="tab-content border-top pt-4">
+
+          <!-- General info -->
+          <div class="tab-pane fade pt-3 active show" id="info" role="tabpanel">
+            <div class="row">
+              <div class="col-md-6 mb-md-0 mb-4">
+
+                <!-- Product gallery -->
+                <div class="tns-carousel-wrapper gallery product-gallery mx-auto" style="max-width: 570px;" lg-uid="lg0">
+                  <div class="tns-outer" id="tns2-ow">
+                    <div class="tns-controls" aria-label="Carousel Navigation" tabindex="0">
+                      <button type="button" data-controls="prev" tabindex="-1" aria-controls="tns2"><i class="ci-arrow-left"></i></button>
+                      
+                    </div>
+                    
+                    <div id="tns2-mw" class="tns-ovh">
+                      <div class="tns-inner" id="tns2-iw">
+                      <div class="tns-carousel-inner  tns-slider tns-carousel tns-subpixel tns-calc tns-horizontal" data-carousel-options="{
+                    &quot;gutter&quot;: 15,
+                    &quot;navContainer&quot;: &quot;#tns-thumbnails&quot;,
+                    &quot;navAsThumbnails&quot;: true
+                  }" id="tns2" style="transform: translate3d(-57.1429%, 0px, 0px);">
+
+                    
+                  {% if prod.image %}
+                  <!-- Product gallery item -->
+                  <a class="gallery-item tns-item" href="{{prod.image.url}}" data-sub-html="<h6 class=&quot;text-light&quot;>Gallery image caption #1</h6>" id="tns2-item0" aria-hidden="true" tabindex="-1">
+                    <img class="rounded" src="{{prod.image.url}}" alt="Carousel image">
+                  </a>
+                {% endif %}
+                
+                {% comment %} {% if prod.image %}
+                  <!-- Product gallery item -->
+                  <a class="gallery-item tns-item" href="{{prod.image.url}}" data-sub-html="<h6 class=&quot;text-light&quot;>Gallery image caption #1</h6>" id="tns2-item0" aria-hidden="true" tabindex="-1">
+                    <img class="rounded" src="{{prod.image.url}}" alt="Carousel image">
+                    <span class="gallery-caption">Image 2</span>
+                  </a>
+                {% endif %}
+                
+                {% if prod.image %}
+                  <!-- Product gallery item -->
+                  <a class="gallery-item tns-item" href="{{prod.image3.url}}" data-sub-html="<h6 class=&quot;text-light&quot;>Gallery image caption #1</h6>" id="tns2-item0" aria-hidden="true" tabindex="-1">
+                    <img class="rounded" src="{{prod.image.url}}" alt="Carousel image">
+                    <span class="gallery-caption">Image 3</span>
+                  </a>
+                {% endif %}
+                
+                {% if prod.image %}
+                  <!-- Product gallery item -->
+                  <a class="gallery-item tns-item" href="{{prod.image.url}}" data-sub-html="<h6 class=&quot;text-light&quot;>Gallery image caption #1</h6>" id="tns2-item0" aria-hidden="true" tabindex="-1">
+                    <img class="rounded" src="{{prod.image.url}}" alt="Carousel image">
+                    <span class="gallery-caption">Image 4</span>
+                  </a>
+                {% endif %} {% endcomment %}
+                
+                    
+                    
+                      <!-- Product gallery item -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+                  <!-- Product gallery thumbnails -->
+                  <div class="tns-thumbnails" id="tns-thumbnails" aria-label="Carousel Pagination">
+                    {% if prod.image %}
+                      <button type="button" data-nav="0" aria-label="Carousel Page 1" aria-controls="tns2" class="" tabindex="-1">
+                        <img src="{{prod.image.url}}" alt="Thumbnail">
+                      </button>
+                    {% endif %}
+                    
+                    
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 ps-xl-5">
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+
+                  <!-- Price -->
+                  <div class="d-flex align-items-center mb-sm-0 mb-4">
+                    <span class="h3 d-inline-block mb-0 text-danger">&#8377; {{prod.price}}</span>
+                  </div>
+                </div>
+
+                <!-- Ordering form -->
+                <form class="row">
+                
+                    <div class="col-lg-2 col-4 order-lg-3 order-3">
+                            <label for="size" class="form-label-lg"></label>
+                              {% comment %} /////////////////////////////////////////////////////////////////////////////////// {% endcomment %}
+                                  {% comment %} <input type="number" class="form-control form-control-sm bg-light me-3" style="width: 4.5rem;" max="10" min="1"> {% endcomment %}
+                                
+                    </div>
+                  
+                  <div class="col-lg-6  order-lg-4 order-4">
+
+                      
+                        <a href="{% url 'add_to_cart' prod.id %}" class="btn d-block w-100 btn-primary">
+                          <i class="ci-cart me-2"></i>
+                          Add to cart
+                        </a>
+                      
+              
+                  </div>
+                  <div class="col-lg-4 col-8 order-lg-5 order-2">
+                    <a href="{% url 'add_remove_wishlist' prod.id %}" class="btn d-block w-100 btn-outline-primary px-lg-4">
+                      <i class="ci-heart me-2"></i>
+                      Favourite
+                    </a>
+                  </div>
+                </form>
+
+                <!-- Terms -->
+                <!-- Accordion -->
+                <div class="accordion accordion-alt mb-4" id="accordion">
+
+                  <!-- Item -->
+                  <div class="accordion-item">
+                    <h6 class="accordion-header" id="accordionHeading-1">
+                      <button class="accordion-button border-bottom-0 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionCollapse-1" aria-expanded="false" aria-controls="accordionCollapse-1">Description</button>
+                    </h6>
+                    <div class="accordion-collapse collapse" id="accordionCollapse-1" aria-labelledby="accordionHeading-1" data-bs-parent="#accordion" >
+                      <div class="accordion-body pt-0">
+                        <p class="fs-sm">
+                         {{prod.description}}
+                        </p>
+
+                        
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Item -->
+                </div>
+
+                <!-- Share -->
+                <div class="mb-5 text-nowrap ">
+                  <h6 class="d-inline-block align-middle me-2 mb-0">Share:</h6>
+                  <a href="#" class="btn-social bs-solid align-middle me-2" data-bs-toggle="tooltip" title="" data-bs-original-title="Facebook">
+                    <i class="ci-facebook"></i>
+                  </a>
+                  <a href="#" class="btn-social bs-solid align-middle me-2" data-bs-toggle="tooltip" title="" data-bs-original-title="Twitter">
+                    <i class="ci-twitter"></i>
+                  </a>
+                  <a href="#" class="btn-social bs-solid align-middle" data-bs-toggle="tooltip" title="" data-bs-original-title="Pinterest">
+                    <i class="ci-pinterest"></i>
+                  </a>
+                </div>
+
+                <!-- Payment -->
+                {% comment %} <div class="pb-3 text-nowrap" data-simplebar="init" data-simplebar-auto-hide="false"><div class="simplebar-wrapper" style="margin: 0px 0px -16px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: 0px; bottom: 0px;"><div class="simplebar-content-wrapper" style="height: auto; overflow: hidden;"><div class="simplebar-content" style="padding: 0px 0px 16px;">
+                  <a href="#" class="d-inline-block mb-3 me-xl-4 me-3">
+                    <img src="{% static 'customer/img/ecommerce/shop/single/cards/visa.jpg' %}" alt="Visa" class="border rounded">
+                  </a>
+                  <a href="#" class="d-inline-block mb-3 me-xl-4 me-3">
+                    <img src="{% static 'customer/img/ecommerce/shop/single/cards/master-card.jpg' %}" alt="Mastercard" class="border rounded">
+                  </a>
+                  <a href="#" class="d-inline-block mb-3">
+                    <img src="{% static 'customer/img/ecommerce/shop/single/cards/pay-pal.jpg' %}" alt="PayPal" class="border rounded">
+                  </a>
+                </div></div></div></div><div class="simplebar-placeholder" style="width: auto; height: 98px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar simplebar-visible" style="width: 0px; display: none;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: hidden;"><div class="simplebar-scrollbar simplebar-visible" style="height: 0px; display: none;"></div></div></div> {% endcomment %}
+              </div>
+            </div>
+          </div>
+
+
+          
+
+
+         
+
+               
+      </section>
+  
+
+</main>
+
+
+{% endblock content %}
+{% block scripts %}
+  <script src="{% static 'customer/vendor/simplebar/dist/simplebar.min.js' %}"></script>
+  <script src="{% static 'customer/vendor/nouislider/dist/nouislider.min.js' %}"></script>
+{% endblock scripts %}

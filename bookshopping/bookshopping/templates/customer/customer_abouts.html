@@ -1,0 +1,59 @@
+{% extends 'customer\layouts\base.html' %}
+{% load static %}
+{% block title %}Abouts as{% endblock title %}
+{% block content %}
+    
+    <!-- Page wrapper for sticky footer -->
+    <!-- Wraps everything except footer to push footer to the bottom of the page if there is little content -->
+    <main class="page-wrapper">
+
+        
+        <!-- START Navbar -->
+        {% include 'customer\layouts\navbar.html' %}
+        <!-- END Navbar -->
+
+        <nav class="bg-secondary mb-3" aria-label="breadcrumb">
+            <div class="container">
+            <ol class="breadcrumb breadcrumb-alt mb-0">
+                <li class="breadcrumb-item">
+                <a href="{% url 'customer_home' %}"><i class="ci-home"></i></a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Abouts as</li>
+            </ol>
+            </div>
+        </nav>
+
+        <!-- Page container -->
+        <section class="container py-lg-6 py-5">
+            <div class="row">
+              <div class="col-md-5 pe-md-0" data-jarallax-element="-15" data-disable-parallax-down="md" style="position: relative; z-index: 0; transform: translate3d(0px, 28.2556px, 0px);">
+                <img src="{% static 'customer/img/ecommerce/aboutus.png' %}" alt="Courtney Alexander" class="rounded">
+              <div id="jarallax-container-1" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; z-index: -100;"><div style="pointer-events: none; transform-style: preserve-3d; backface-visibility: hidden; will-change: transform, opacity; position: fixed;"></div></div></div>
+              <div class="col-md-7 mt-md-n6 ms-md-n4 ps-md-0" data-jarallax-element="25" data-disable-parallax-down="md" style="position: relative; z-index: 0; transform: translate3d(0px, -40.5709px, 0px);">
+                <div class="py-5 px-lg-5 px-sm-4 px-3 bg-light rounded shadow-sm">
+  
+                  <!-- Quote -->
+                  <blockquote class="blockquote">
+                    <p class="pe-sm-4 lead fw-bold">The process of buying books from shop is too time consuming and tiresome also
+                      selling old books. DealMyBooks provide many benefits to students.
+                      DealMyBooks reduces the need of go to many shops for purchase a particular
+                      book. This project is based on trading of books It manages the book
+                      information.</p>
+                    <p class="pe-sm-4 lead fw-bold">Anyone can buy or sell books through DealMyBooks.</p>
+                    <footer class="d-sm-flex align-items-start justify-content-between pt-4 pe-4">
+                      <div class="me-sm-4 mb-sm-0 mb-5">
+                        <h3 class="h6 mb-1">DealMyBooks</h3>
+                        {% comment %} <span class="fs-sm text-muted">Founders -  <br</span> {% endcomment %}
+                      </div>
+                      {% comment %} <img class="d-block ms-sm-0 ms-auto" src="{% static 'customer/img/ecommerce/signature.png' %}" width="100" alt="Director's signature"> {% endcomment %}
+                    </footer>
+                  </blockquote>
+                </div>
+              <div id="jarallax-container-2" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; z-index: -100;"><div style="pointer-events: none; transform-style: preserve-3d; backface-visibility: hidden; will-change: transform, opacity; position: fixed;"></div></div></div>
+            </div>
+          </section>
+
+</main>
+
+
+{% endblock content %}

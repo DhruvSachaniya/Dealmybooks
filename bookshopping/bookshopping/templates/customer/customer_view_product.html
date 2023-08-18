@@ -1,0 +1,111 @@
+{% extends 'customer\layouts\base.html' %}
+{% load static %}
+{% block title %}View Products{% endblock title %}
+{% block links %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/fontawesome.min.css" integrity="sha512-8Vtie9oRR62i7vkmVUISvuwOeipGv8Jd+Sur/ORKDD5JiLgTGeBSkI3ISOhc730VGvA5VVQPwKIKlmi+zMZ71w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock links %}
+{% block content %}
+    
+    <!-- Page wrapper for sticky footer -->
+    <!-- Wraps everything except footer to push footer to the bottom of the page if there is little content -->
+    <main class="page-wrapper">
+
+        
+        <!-- START Navbar -->
+        {% include 'customer\layouts\navbar.html' %}
+        <!-- END Navbar -->
+
+        <nav class="bg-secondary mb-3" aria-label="breadcrumb">
+            <div class="container">
+            <ol class="breadcrumb breadcrumb-alt mb-0">
+                <li class="breadcrumb-item">
+                <a href="{% url 'customer_home' %}"><i class="ci-home"></i></a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">View Products</li>
+            </ol>
+            </div>
+        </nav>
+
+        <!-- Page container -->
+        <section class="container pt-3 pt-lg-4 pb-5 pb-lg-6">
+        <div class="row pb-2 pb-lg-0">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                <span class="fw-bold">{{message}}</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+            
+
+            
+            <!-- Content -->
+            <div class="col-lg-12 mx-auto">
+                
+                    <h2 class="mb-5 text-center">View Products</h2>
+
+                    <div class="row overflow-auto" style="height:500px;">
+                      
+                        <div class="accordion accordion-alt " id="orders">
+
+                            <div class="bg-secondary rounded mb-4">
+                                <div class="table-responsive">
+                                {% if prod %}
+                                    
+                                <table class="table text-center">
+                                    <thead class="fs-lg">
+                                      <tr>
+                                        <th class="border-0">Id</th>
+                                        <th class="border-0">Product Name</th>
+                                        <th class="border-0">Product Description</th>
+                                        <th class="border-0">Price</th>
+                                        <th class="border-0">Quantity</th>
+                                        <th class="border-0">Action</th>
+                                        <th class="border-0">View</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for pr in prod %}
+                                          <tr>
+                                              <td class="py-3">{{pr.id}}</td>
+                                              <td class="py-3">{{pr.product_name}}</td>
+                                              <td class="py-3">{{pr.description}}</td>
+                                              <td class="py-3">&#8377; {{pr.price}} </td>
+                                              <td class="py-3">{{pr.quantity}}</td>
+                                              <td class="">
+                                                <a href="{% url 'edit_product' pr.id %}" class="btn btn-success"><i class="ci-checkmark align-middle m-n2"></i></a>
+                                                <a href="{% url 'delete_product' pr.id %}" class="btn btn-danger"><i class="ci-delete align-middle m-n2"></i></a>
+                                            </td>
+                                              <td class="">
+                                                  <a href="{% url 'customer_view_products_details' pr.id %}" class="btn btn-success"><i class="ci-eye align-middle m-n2"></i></a>
+                                              </td>
+                                          </tr>
+    
+                                          {% endfor %}
+
+                                    </tbody>
+                                  </table>
+                                    {% else %}
+                                        <h5 class="text-center">No Products Available</h5>
+                                    {% endif %} 
+                                  </div>
+                                
+                            </div>
+              
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+        </section>
+
+
+
+</main>
+
+
+{% endblock content %}
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/fontawesome.min.js" integrity="sha512-PoFg70xtc+rAkD9xsjaZwIMkhkgbl1TkoaRrgucfsct7SVy9KvTj5LtECit+ZjQ3ts+7xWzgfHOGzdolfWEgrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock scripts %}

@@ -1,0 +1,95 @@
+{% extends 'customer\layouts\base.html' %}
+{% load static %}
+{% block title %}Orders Details{% endblock title %}
+{% block content %}
+    
+    <!-- Page wrapper for sticky footer -->
+    <!-- Wraps everything except footer to push footer to the bottom of the page if there is little content -->
+    <main class="page-wrapper">
+
+        
+        <!-- START Navbar -->
+        {% include 'customer\layouts\navbar.html' %}
+        <!-- END Navbar -->
+
+        <nav class="bg-secondary mb-3" aria-label="breadcrumb">
+            <div class="container">
+            <ol class="breadcrumb breadcrumb-alt mb-0">
+                <li class="breadcrumb-item">
+                <a href="{% url 'customer_home' %}"><i class="ci-home"></i></a>
+                </li>
+                <li class="breadcrumb-item" aria-current="page"><a href="{% url 'customer_orders' %}">My Orders</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Orders Details</li>
+            </ol>
+            </div>
+        </nav>
+
+        <!-- Page container -->
+        <section class="container pt-3 pt-lg-4 pb-5 pb-lg-6">
+          <div class="row pb-2 pb-lg-0">
+  
+            <!-- Content -->
+            <div class="col-lg-10 mx-auto">
+              <div class="d-flex align-items-center justify-content-between mb-4 pb-sm-4">
+                <h1 class="h2 mb-0">Order Items</h1>
+                <span><b>Order ID: {{oid}}</b></span>
+              </div>
+  
+              {{cat}}
+              <div class="row mb-5">
+                <div class="col-4">
+                  <P><b>Billing Details</b></P>
+                  <p class="mb-1"><b>Name:</b> {{baddress.username}}</p>
+                  <p class="mb-1"><b>Email:</b> {{baddress.email}}</p>
+                  <p class="mb-1"><b>Contact:</b> {{baddress.contact}}</p>
+                  <p class="mb-1"><b>Address:</b> {{baddress.address}}</p>
+                </div>
+                <div class="col-4">
+                  <P><b>Shipping Details</b></P>
+                  <p class="mb-1"><b>Name:</b> {{saddress.username}}</p>
+                  <p class="mb-1"><b>Email:</b> {{saddress.email}}</p>
+                  <p class="mb-1"><b>Contact:</b> {{saddress.contact}}</p>
+                  <p class="mb-1"><b>Address:</b> {{saddress.address}}</p>
+                </div>
+              
+                <div class="col-4"></div>
+              </div>
+  
+  
+              {% if items %}
+                {% for item in items %}
+                  <!-- Review -->
+                  <div class="mb-4 pb-4 border-bottom">
+                    
+                    <div class="row">
+                      <div class="col-md-3 col-sm-4 mb-sm-0 mb-3">
+                        <div>
+                          <img src="{{item.image.url}}" alt="Product Image" style="background-size:cover; height:150px; width:150px;">
+                        </div>
+                      </div>
+                      <div class="col">
+                        <p class="mb-3"><b>Product ID:</b> {{item.id}}</p>
+                        <p class="mb-3"><b>Product Name:</b> {{item.product_name}}</p>
+                        <p class="mb-3"><b>Price:</b> &#8377; {{item.prices}}</p>
+                        <p class="mb-3"><b>Quantity:</b> {{item.quantity}}</p>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+              {% else %}
+                <h5 class="text-center">No Order Items Available</h5>
+              {% endif %}
+  
+              
+  
+              
+            </div>
+          </div>
+        </section>
+
+
+
+</main>
+
+
+{% endblock content %}

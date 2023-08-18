@@ -1,0 +1,104 @@
+{% extends 'customer\layouts\base.html' %}
+{% load static %}
+{% block title %}Wishlist{% endblock title %}
+
+{% block content %}
+    
+    <!-- Page wrapper for sticky footer -->
+    <!-- Wraps everything except footer to push footer to the bottom of the page if there is little content -->
+    <main class="page-wrapper">
+
+        
+        <!-- START Navbar -->
+        {% include 'customer\layouts\navbar.html' %}
+        <!-- END Navbar -->
+
+        <!-- Breadcrumb -->
+        <nav class="bg-secondary mb-3" aria-label="breadcrumb">
+            <div class="container">
+            <ol class="breadcrumb breadcrumb-alt mb-0">
+                <li class="breadcrumb-item">
+                <a href="{% url 'customer_home' %}"><i class="ci-home"></i></a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Wishlist</li>
+            </ol>
+            </div>
+        </nav>
+
+        <!-- Page container -->
+        <section class="container pt-3 pt-lg-4 pb-5 pb-lg-6">
+        <div class="row pb-2 pb-lg-0">
+
+
+           
+
+            <!-- Content -->
+            <div class="col-lg-10 mx-auto">
+                    
+
+                    <h2 class="mb-5 text-center">Wishlist</h2>
+
+
+                     
+                        <div class="row mx-n2 mb-5 overflow-auto" style="height:500px;">
+                                <!-- Item -->
+                        {% if products %}
+
+                            {% for prod in products %}
+                        
+
+                                <!-- Item -->
+                                <div class="col-md-4 col-sm-6 px-2 pb-4 mb-2">
+                                    <div class="card card-product mx-auto">
+                                    <div class="card-product-img">
+                                        <a href="{% url 'customer_product_details' prod.id %}" class="card-img-top">
+                                        <img src="{{prod.product.image.url}}" alt="Product image" style="width:330px; height:300px;">
+                                        </a>
+                                        
+                                        <div class="card-product-widgets-bottom">
+                                        <a href="{% url 'add_remove_wishlist' prod.product.id %}" class="btn-wishlist active ms-auto" data-bs-toggle="tooltip" data-bs-placement="left" title="Remove from wishlist"></a>
+                                        </div>
+                                    </div>
+                                    <div class="card-body pb-2">
+                                        <h3 class="card-product-title text-truncate mb-2">
+                                        <a href="" class="nav-link">{{prod.product.product_name}}</a>
+                                        </h3>
+                                        <div class="d-flex align-items-center">
+                                        <span class="h5 d-inline-block mb-0">&#8377; {{prod.product.price}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        
+                                        <a href="{% url 'add_to_cart' prod.id %}" type="button" class="btn btn-primary d-block w-100">
+                                        <i class="ci-cart align-middle mt-n1 me-2"></i>
+                                        Add to cart
+                                        </a>
+                                        
+                                    </div>
+                                    </div>
+                                </div>
+
+                        {% endfor %}
+
+
+                        {% else %}
+
+                                <h4 class="text-center my-auto">No products were added to the wishlist</h4>
+                        {% endif %}
+
+                            
+
+                        </div>
+                    
+                    </div>
+                    
+                
+            </div>
+        </div>
+        </section>
+
+    </main>
+
+
+{% endblock content %}
+

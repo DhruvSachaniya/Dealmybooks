@@ -1,0 +1,128 @@
+{% extends 'customer\layouts\base.html' %}
+{% load static %}
+{% block title %}My Profile{% endblock title %}
+
+{% block content %}
+    
+    <!-- Page wrapper for sticky footer -->
+    <!-- Wraps everything except footer to push footer to the bottom of the page if there is little content -->
+    <main class="page-wrapper">
+
+
+        <!-- START Navbar -->
+        {% include 'customer\layouts\navbar.html' %}
+        <!-- END Navbar -->
+
+        <!-- Breadcrumb -->
+        <nav class="bg-secondary mb-3" aria-label="breadcrumb">
+            <div class="container">
+            <ol class="breadcrumb breadcrumb-alt mb-0">
+                <li class="breadcrumb-item">
+                <a href="index.html"><i class="ci-home"></i></a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">My profile</li>
+            </ol>
+            </div>
+        </nav>
+
+
+        <!-- Page container -->
+        <section class="container pt-3 pt-lg-4 pb-5 pb-lg-6">
+        <div class="row pb-2 pb-lg-0">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                        <span class="fw-bold">{{message}}</span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <div class="col-lg-5 mx-auto my-auto" style="background-image: url({% static 'customer\img\ecommerce\profile_img.svg' %}); background-repeat: no-repeat; height:600px;"></div>
+
+            <!-- Content -->
+            <div class="col-lg-7 mx-auto my-auto">
+        
+                    <h2 class="mb-5 text-center">My profile</h2>
+ 
+                        <form action="/customer/customer_update_profile/{{profile.id}}/" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-sm-6 mb-4">
+                                    <label class="form-label-lg">Username</label>
+                                    <input type="text" name="username" class="form-control" id="username" value="{{profile.user.username}}" placeholder="User Name" required="">
+                                        <span class="fs-sm text-danger"></span>
+                               
+                                </div>
+                                <div class="col-sm-6 mb-4">
+                                    <label for="ac-email" class="form-label-lg">Email</label>
+                                        <input type="email" name="email" class="form-control" id="email" value="{{profile.user.email}}" placeholder="Your Email" required="">
+                                        
+                                            <span class="fs-sm text-danger"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="row pb-3">  
+                                <div class="col-sm-6 mb-4">
+                                    <div class="mb-3">
+                                        <label class="form-label-lg">Date of Birth</label>
+                                        <input type="date" name="dob" class="form-control" value="{{profile.dob}}" id="dob" placeholder="User Birthday" required="">
+                                       
+                                            <span class="fs-sm text-danger"></span>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 mb-4">
+                                    <label for="ac-country" class="form-label-lg">Gender</label>
+                                    <select name="gender" id="gender" class="form-select" required=""> 
+                                        <option value="Male" {% if profile.gender == 'Male' %}Selected{% endif %}>Male</option>
+                                        <option value="Female" {% if profile.gender == 'Female' %}Selected{% endif %}>Female</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-12 mb-4">
+                                <label class="form-label-lg">Contact Number</label>
+                                <input type="number" name="contact" class="form-control" id="contact" value="{{profile.contact}}" placeholder=" Your Contact" required="">
+                                    
+                                        <span class="fs-sm text-danger"></span>
+                                   
+                                </div>
+                                <div class="col-sm-12 mb-4">
+                                    <label class="form-label-lg">Address</label>
+                                    <textarea name="address" class="form-control" id="" cols="30" rows="5">{{profile.address}}</textarea>
+                                        <span class="fs-sm text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="row" style="text-align:right;">
+                                <a href="{% url 'customer_change_password' %}" class="btn text-info btn-link fs-base text-decoration-none">
+                                    <i class="ci-lock fs-lg mt-n1 me-2"></i>
+                                    Change Password?
+                                </a>
+                            </div>
+
+                            
+                            
+                            <button type="submit" class="btn btn-primary btn-lg">&nbsp;Save changes&nbsp;</button>
+                        </form>
+                
+                    
+                
+            </div>
+        </div>
+        </section>
+
+</main>
+
+
+{% endblock content %}
+{% block scripts %}
+    <script>
+        function showPreview(event){
+        if(event.target.files.length > 0) {
+            var src = URL.createObjectURL(event.target.files[0]);
+            var preview = document.getElementById('file-ip-preview');
+            preview.src = src;
+        }
+        }
+  </script>
+{% endblock scripts %}

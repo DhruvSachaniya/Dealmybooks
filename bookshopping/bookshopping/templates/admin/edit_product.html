@@ -1,0 +1,107 @@
+{% extends 'admin\layouts\base.html' %}
+{% load static %}
+{% block title %}Edit Product{% endblock title %}
+{% block content %}
+<main class="content">
+	<div class="container-fluid p-0">
+
+        <h1 class="h3 mb-3">Edit Products</h1>
+
+        <div class="row mt-2">
+        	<div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Edit Products</h5>
+                    </div>
+                    <div class="card-body">
+                        <form action="/myadmin/update_product/{{prod.id}}/" method="post" enctype="multipart/form-data">   
+                            {% csrf_token %}
+
+                            <div class="mb-3">
+                                <label class="form-label">Product Name</label>
+                                <input type="text" name="productname" id="productname" value="{{prod.product_name}}" class="form-control" placeholder="Product Name">
+                            
+                                    <label class="small text-danger"></label>
+                            
+                            </div>
+
+                            <div class="row">
+                                <div class="mb-3 col-sm-6">
+                                    <label class="form-label">Select Category</label>
+                                    <select class="form-select" name="category" id="category">
+                                        <option disabled="">---Select Category---</option>
+                                        {% for cat in cate %}
+                                        <option value="{{cat.id}}">{{cat.category_name}}</option>
+                                        {% endfor %}
+                                    </select>                             
+                                        <label class="small text-danger"></label>                                
+                                </div>
+                                <div class="mb-3 col-sm-6">
+                                    <label class="form-label">Select Subcategory</label>
+                                    <select class="form-select" name="subcategory" id="subcategory">
+                                        <option disabled="">---Select Subcategory---</option>
+                                        {% for subcat in subcate %}
+                                        <option value="{{subcat.id}}">{{subcat.subcategory_name}}</option>
+                                        {% endfor %}
+                                    </select>   
+                                        <label class="small text-danger"></label>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Description</label>
+                                <input type="text" name="descrption" id="descrption" value="{{prod.description}}" class="form-control" placeholder="Description" >
+                                    <label class="small text-danger"></label>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Price</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-rupee-sign"></i></span>
+                                    <input type="number" name="price" id="price" value="{{prod.price}}" class="form-control" placeholder="Price">
+                                </div>
+                                    <label class="small text-danger"></label>
+                            </div> 
+
+                            <div class="mb-3">
+                                <label class="form-label">quantity</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-rupee-sign"></i></span>
+                                    <input type="number" name="quantity" id="quantity" value="{{prod.quantity}}" class="form-control" placeholder="Price" formnovalidate>
+                                </div>
+                                    <label class="small text-danger"></label>
+                            </div> 
+
+                            
+                            <div class="mb-3 error-placeholder">
+                                <label class="form-label">File</label>
+                                <div>
+                                    <input type="file" value="{{prod.image.url}}" class="validation-file" name="file" id="file">
+                                </div>
+                            </div>
+
+                            <a href="{% url 'view_products' %}" class="btn btn-primary">Back</a>
+                            <button type="submit" class="btn btn-primary mx-2">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</main>
+{% endblock content %}
+{% block scripts %}
+{% comment %} <script>
+    var event_ele_id;
+    function showPreview(event){
+        event_ele_id = event.target.id;
+
+        if(event.target.files.length > 0) {
+            var src = URL.createObjectURL(event.target.files[0]);
+            var preview = document.getElementById(`file-ip-preview${event_ele_id.substr(-1)}`);
+            preview.src = src;
+        }
+    }
+</script> {% endcomment %}
+{% endblock scripts %}

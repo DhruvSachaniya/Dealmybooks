@@ -1,0 +1,315 @@
+{% extends 'customer\layouts\base.html' %}
+{% load static %}
+{% block title %}Your Cart{% endblock title %}
+
+{% block scripts %}
+{% csrf_token %}
+  <script type="text/javascript">
+     function updateQuantity(quantity, pid)
+    {
+        $.ajax({
+
+            type:"POST",
+            url:'/customer/update_quantity/',
+            data : { quantity : quantity, product_id : pid,'csrfmiddlewaretoken': $("input[name=csrfmiddlewaretoken]").val() },
+            // dataType: 'json',
+            success:function(result)
+            {
+                document.location='http://127.0.0.1:8000/customer/customer_cart/';
+            }
+        });
+    }
+    
+  </script>
+{% endblock %}
+{% block content %}
+    
+    <!-- Page wrapper for sticky footer -->
+    <!-- Wraps everything except footer to push footer to the bottom of the page if there is little content -->
+    <main class="page-wrapper">
+
+        <!-- START Navbar -->
+        {% include 'customer\layouts\navbar.html' %}
+        <!-- END Navbar -->
+        
+        <!-- Breadcrumb -->
+        <nav class="bg-secondary mb-3" aria-label="breadcrumb">
+            <div class="container">
+            <ol class="breadcrumb breadcrumb-alt mb-0">
+                <li class="breadcrumb-item">
+                <a href=""><i class="ci-home"></i></a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Your Cart</li>
+            </ol>
+            </div>
+        </nav>
+
+        <!-- Page container -->
+        <section class="container pt-3 pt-lg-4 pb-5 pb-lg-6">
+        <div class="row pb-2 pb-lg-0">
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                    <span class="fw-bold">{{message}}</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <!-- Content -->
+            <div class="col-lg-8 pe-lg-6">
+                <div class="card shadow-lg d-flex p-2 ">
+                
+                    
+
+                    <h2 class="card-title mt-2 mb-4 mx-auto">Your Cart</h2>
+
+                    
+
+
+                    <div class="card-body" > 
+                        
+                        <!-- Order review -->
+                        <!-- Order review -->
+                        <h2 class="h4 mb-4">Order Review</h2>
+                        <div class="bg-secondary rounded mb-5">
+                            {% if prod %}
+                                {% for pr in prod %}
+                                    <!-- Item -->
+                                    <div class="d-flex align-items-start px-2 px-sm-4 py-4 border-bottom">
+                                        <a href="{% url 'customer_product_details' pr.product.id %}" style="min-width: 80px;">
+                                        <img src="{{pr.product.image.url}}" width="80" alt="Product thumb" style="width:80px; height:80px;">
+                                        </a>
+                                        <div class="w-100 ps-3">
+                                        <div class="d-sm-flex">
+                                            <div class="pe-sm-3 w-100" style="max-width: 16rem;">
+                                            <h3 class="fs-sm mb-3">
+                                                <a href="{% url 'customer_product_details' pr.product.id %}" class="nav-link fw-bold">{{pr.product.product_name}}</a>
+                                            </h3>
+                                            <ul class="list-unstyled fs-xs mt-n2 mb-2">
+                                              <li class="mb-0"><span class="text-muted">Description:</span>{{pr.product.description}}</li>
+                                            </ul>
+                                            </div>
+                                            <div class="d-flex align-items-start pe-sm-3">
+                                              {% comment %} /////////////////////////////////////////////////////////////////////////// {% endcomment %}
+                                                {% comment %} <input type="text" class="form-control form-control-sm bg-light me-3" style="width: 4.5rem;" value="{{pr.quantity}}" onchange="return updateQuantity(this.value,{{pr.id}})"> {% endcomment %}
+                                            
+                                            <div class="text-nowrap pt-2"><strong class="text-danger">&#8377;{% widthratio pr.quantity 1 pr.product.price %}</strong></div>
+                                            </div>
+                                            <div class="d-flex align-items-center flex-sm-column text-sm-center ms-sm-auto pt-3 pt-sm-0">
+                                                
+                                                    <a href="{% url 'remove_from_cart' pr.product.id %}" class="btn btn-outline-primary btn-sm me-2 me-sm-0">Delete</a>
+                                              
+                                            
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                <div class="px-3 px-sm-4 py-4 text-end">
+                                    <span class="text-muted">Subtotal:<strong class="text-dark fs-lg ms-2">&#8377; {{price_total}}</strong></span>
+                                </div>
+                            
+                            {% else %}
+
+                                    <h6 class="text-center py-5">Your Cart is Empty.</h6>
+                            {% endif %}
+                        </div>
+                    
+                        <hr class="mb-4">
+
+                        <!-- Address -->
+
+                        <h2 class="h4 mb-4">1. Billing Address</h2>
+                        <div class="row pb-3" id="" >
+
+                          <form action="" method="POST">
+                            {% csrf_token %}
+                            <span id="billing">
+                                <div class="col-sm-12 mb-4">
+                                <label for="ch-fn" class="form-label-lg">First Name</label>
+                                <input type="text" class="form-control form-control-lg" name="name1" value="{{profile.user.username}}" id="name1" placeholder="Customer name" readonly>
+                                </div>
+
+                                <div class="col-sm-12 mb-4">
+                                <label for="ch-email" class="form-label-lg">Email</label>
+                                <input type="email" class="form-control form-control-lg" name="email1" id="email1" placeholder="Email" value="{{profile.user.email}}" readonly>
+                                </div>
+                                <div class="col-sm-12 mb-4">
+                                <label for="ch-phone" class="form-label-lg">Contact</label>
+                                <input type="text" class="form-control form-control-lg" name="contact1" id="contact1" placeholder="Your Contact number" value="{{profile.contact}}" readonly>
+                                </div>
+                                
+                                <div class="col-sm-12 mb-4">
+                                <label for="ch-address" class="form-label-lg">Address</label>
+                                <input type="text" class="form-control form-control-lg" name="address1" id="address1" placeholder="Street, appartment..." value="{{profile.address}}" readonly>
+                                </div>
+                            </span>
+
+
+                            <div class="col-12 mb-4">
+                                <div class="form-check">
+                                  <input type="checkbox" class="form-check-input" name="bill_check" id="same-details" data-target="#demo"  checked>
+                                  <label for="same-details" class="form-check-label fs-base">Billing and Shipping details are the same</label>
+                                </div>
+                            </div>
+
+                            <span id="demo" style="display:none">
+                              <div class="col-sm-12 mb-4">
+                              <label for="ch-fn" class="form-label-lg">First Name</label>
+                              <input type="text" class="form-control form-control-lg" name="name2" id="name2" placeholder="Customer name" >
+                              </div>
+
+                              <div class="col-sm-12 mb-4">
+                              <label for="ch-email" class="form-label-lg">Email</label>
+                              <input type="email" class="form-control form-control-lg"  name="email2" id="email2" placeholder="Email" >
+                              </div>
+                              <div class="col-sm-12 mb-4">
+                              <label for="ch-phone" class="form-label-lg">Contact</label>
+                              <input type="text" class="form-control form-control-lg"  name="contact2" id="contact2" placeholder="Your Contact number" >
+                              </div>
+                              
+                              <div class="col-sm-12 mb-4">
+                              <label for="ch-address" class="form-label-lg">Address</label>
+                              <input type="text" class="form-control form-control-lg"  name="address2" id="address2" placeholder="Street, appartment..." >
+                              </div>
+                          </span>
+                        </div>
+
+
+
+                        <h2 class="h4 mb-4">2. Shipping Address</h2>
+                        <div class="row pb-3" id="" >
+                            
+                              
+                            <span id="billing1">
+                                <div class="col-sm-12 mb-4">
+                                <label for="ch-fn" class="form-label-lg">First Name</label>
+                                <input type="text" class="form-control form-control-lg" name="sname" id="sname" placeholder="Customer name" required>
+                                </div>
+
+                                <div class="col-sm-12 mb-4">
+                                <label for="ch-email" class="form-label-lg">Email</label>
+                                <input type="email"  class="form-control form-control-lg" name="semail" id="semail" placeholder="Email" required>
+                                </div>
+                                <div class="col-sm-12 mb-4">
+                                <label for="ch-phone" class="form-label-lg">Contact</label>
+                                <input type="text"  class="form-control form-control-lg" name="scontact" id="scontact" placeholder="Your Contact number" required>
+                                </div>
+                                
+                                <div class="col-sm-12 mb-4">
+                                <label for="ch-address" class="form-label-lg">Address</label>
+                                <input type="text"  class="form-control form-control-lg" name="saddress" id="saddress" placeholder="Street, appartment..." required>
+                                </div>
+                            </span>
+
+                            <input type="hidden" name="total_price" id="total_price" value="{{price_total}}">
+
+                            
+                            <!-- Payment -->
+
+                        <hr class="border-top-0 border-bottom my-4">
+                        <h2 class="h4 pt-2 mb-4">3. Payment Method</h2>
+                        <div class="row pb-4">
+                          <div class="col-lg-7">
+              
+                              <!-- Payment accordion -->
+                            <div class="accordion accordion-alt" id="payment-methods">
+              
+                                <!-- Item -->
+                                <div class="accordion-item mb-3 bg-white border rounded shadow-sm">
+                                  <h6 class="accordion-header" id="paymentHeading-1">
+                                    <button class="accordion-button accordion-button-indicator-0 py-0 px-4 rounded" type="button" data-bs-toggle="collapse" data-bs-target="#payment-collapse-1" aria-expanded="true" aria-controls="payment-collapse-1">
+                                      <div class="form-check w-100 py-4">
+                                        <input type="radio" class="form-check-input" id="cc" value="cc" name="payment" checked="">
+                                        <label for="cc" class="form-check-label d-flex align-items-center">
+                                          <strong class="d-block me-3 fs-base">Net Banking</strong>
+                                          <img src="{% static 'customer/img/ecommerce/checkout/cards.png' %}" width="108" alt="Credit cards">
+                                        </label>
+                                      </div>
+                                    </button>
+                                  </h6>
+                                </div>
+              
+                                <!-- Item -->
+                                  <div class="accordion-item bg-white border rounded shadow-sm">
+                                    <h6 class="accordion-header" id="paymentHeading-3">
+                                      <button class="accordion-button accordion-button-indicator-0 py-0 px-4 rounded collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#payment-collapse-3" aria-expanded="false" aria-controls="payment-collapse-3">
+                                        <div class="form-check w-100 py-4">
+                                          <input type="radio" class="form-check-input" id="cash" value="cd" name="payment">
+                                          <label for="cash" class="form-check-label d-block">
+                                            <strong class="d-block me-3 fs-base">Cash on delivery</strong>
+                                          </label>
+                                        </div>
+                                      </button>
+                                    </h6>
+                                    <div class="accordion-collapse px-4 collapse" id="payment-collapse-3" aria-labelledby="paymentHeading-3" data-bs-parent="#payment-methods">
+                                      <div class="accordion-body pt-0 pb-3">
+                                        <p class="mb-2 text-muted">You have selected to pay with cash upon delivery.</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <input type="submit" value="Order" class="btn btn-primary btn-lg">
+                        </form>
+                            
+                        </div>
+
+                        
+                    </div>
+                 </div>
+            </div>
+
+
+                    <!-- Order totals (sticky sidebar) -->
+                    <!-- For more sticky sidebar options visit https://abouolia.github.io/sticky-sidebar/#options -->
+                    <aside class="col-lg-4">
+                        <div class="sidebar-sticky" data-sidebar-sticky-options='{
+                        "topSpacing": 120,
+                        "minWidth": 991
+                        }'>
+                        <div class="sidebar-sticky-inner">
+                            
+                            <div class="bg-secondary rounded mb-4">
+                            <div class="border-bottom p-4">
+                                <h2 class="h4 mb-0">Order totals</h2>
+                            </div>
+                            <ul class="list-unstyled border-bottom mb-0 p-4">
+                                <li class="d-flex justify-content-between mb-2">
+                                <span class="fw-bold">Subtotal:</span>
+                                <span class="fw-bold">&#8377; {{price_total}}</span>
+                                </li>
+                            </ul>
+                            <div class="d-flex justify-content-between p-4">
+                                <span class="h5 mb-0">Order total:</span>
+                                <span class="h5 mb-0">&#8377; {{price_total}}</span>
+                            </div>
+                          </div>
+                        </div>
+                        </div>
+                    </aside>
+
+                  
+            </div>
+        </div>
+        </section>
+
+    </main>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#same-details").click(function(){
+    $("#billing").toggle();
+    $("#demo").toggle();
+
+  });
+});
+
+</script>
+
+
+{% endblock content %}
+

@@ -1,0 +1,44 @@
+{% extends 'customer\layouts\base.html' %}
+{% load static %}
+{% block title %}Success{% endblock title %}
+{% block content %}
+    
+    <!-- Page wrapper for sticky footer -->
+    <!-- Wraps everything except footer to push footer to the bottom of the page if there is little content -->
+    <main class="page-wrapper">
+
+        
+        <!-- START Navbar -->
+        {% include 'customer\layouts\navbar.html' %}
+        <!-- END Navbar -->
+
+        <nav class="bg-secondary mb-3" aria-label="breadcrumb">
+            <div class="container">
+            <ol class="breadcrumb breadcrumb-alt mb-0">
+                <li class="breadcrumb-item">
+                <a href="{% url 'customer_home' %}"><i class="ci-home"></i></a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Success</li>
+            </ol>
+            </div>
+        </nav>
+
+        <!-- Page container -->
+        <section class="container pt-3 pt-lg-4 pb-5 pb-lg-6">
+            <div class="row pb-2 pb-lg-0">
+                <div class="row">
+
+                    <div class="col-12">
+                        <h1 class="text-center text-danger">Congratulations</h1>
+                        <h3 class="text-center text-success">Your order has been placed successfully </h3>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+
+</main>
+
+
+{% endblock content %}

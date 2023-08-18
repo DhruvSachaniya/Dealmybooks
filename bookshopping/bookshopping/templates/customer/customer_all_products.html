@@ -1,0 +1,115 @@
+{% extends 'customer\layouts\base.html' %}
+{% load static %}
+{% block title %}All Products{% endblock title %}
+{% block links %}
+  <link rel="stylesheet" media="screen" href="{% static 'customer/vendor/simplebar/dist/simplebar.min.css' %}"/>
+  <link rel="stylesheet" media="screen" href="{% static 'customer/vendor/nouislider/dist/nouislider.min.css' %}"/>
+{% endblock links %}
+{% block content %}
+
+<!-- Page wrapper for sticky footer -->
+    <!-- Wraps everything except footer to push footer to the bottom of the page if there is little content -->
+    <main class="page-wrapper">
+
+        
+      <!-- START Navbar -->
+      {% include 'customer\layouts\navbar.html' %}
+      <!-- END Navbar -->
+
+      <nav class="bg-secondary mb-3" aria-label="breadcrumb">
+          <div class="container">
+          <ol class="breadcrumb breadcrumb-alt mb-0">
+              <li class="breadcrumb-item">
+              <a href="{% url 'customer_home' %}"><i class="ci-home"></i></a>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">All Products</li>
+          </ol>
+          </div>
+      </nav>
+
+      <!-- Page container -->
+      <section class="container pt-3 pb-5 pb-md-6 mb-2 mb-lg-0">
+        
+        {% if messages %}
+          {% for message in messages %}
+              <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                  <span class="fw-bold">{{message}}</span>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+          {% endfor %}
+      {% endif %}
+
+        <!-- Toolbar + Pagination -->
+        <div class="row mb-4 pb-2">
+        </div>
+
+        <div class="row flex-lg-nowrap">
+
+
+          <!-- Filters (sidebar) -->
+          
+
+
+          <!-- Product grid -->
+          <div class="col">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3" data-filters-columns="">
+              
+              {% for prod in prods %}
+                <!-- Item -->
+                <div class="col pb-sm-2 mb-grid-gutter">
+                  <div class="card card-product mx-auto">
+                    <div class="card-product-img">
+                      <a href="{% url 'customer_product_details' prod.id %}" class="card-img-top">
+                        <img src="{% if prod.image %}{{prod.image.url}}{% endif %}" alt="Product image" style="width:370px; height:320px">
+                      </a>
+                      
+                      <div class="card-product-widgets-bottom">
+                        {% if not prod.cart.in_wishlist %}
+                          <a href="{% url 'add_remove_wishlist' prod.id %}" class="btn-wishlist ms-auto" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"></a>
+                        {% else %}
+                            <a href="{% url 'add_remove_wishlist' prod.id %}" class="btn-wishlist active ms-auto" data-bs-toggle="tooltip" data-bs-placement="left" title="Remove from wishlist"></a>
+                        {% endif %}
+                      </div>
+                    </div>
+                    <div class="card-body pb-2">
+                      <h3 class="card-product-title text-truncate mb-2">
+                        <a href="shop-single.html" class="nav-link">{{prod.product_name}}</a>
+                      </h3>
+                      <div class="d-flex align-items-center">
+                        <span class="h5 d-inline-block mb-0">&#8377; {{prod.price}}</span>
+                      </div>
+                    </div>
+                    <div class="card-footer">
+                      
+              
+                        <a href="{% url 'add_to_cart' prod.id %}" type="button" class="btn btn-primary d-block w-100">
+                          <i class="ci-cart align-middle mt-n1 me-2"></i>
+                          Add to cart
+                        </a>
+                
+                    
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+
+            </div>
+          
+              
+
+              
+
+            <!-- Toolbar + Pagination -->
+          </div>
+        </div>
+      </section>
+  
+
+</main>
+
+
+{% endblock content %}
+{% block scripts %}
+  <script src="{% static 'customer/vendor/simplebar/dist/simplebar.min.js' %}"></script>
+  <script src="{% static 'customer/vendor/nouislider/dist/nouislider.min.js' %}"></script>
+{% endblock scripts %}

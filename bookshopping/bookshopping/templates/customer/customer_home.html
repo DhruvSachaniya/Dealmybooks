@@ -1,0 +1,380 @@
+{% extends 'customer\layouts\base.html' %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+{% block content %}
+
+<!-- Page wrapper for sticky footer -->
+<!-- Wraps everything except footer to push footer to the bottom of the page if there is little content -->
+<main class="page-wrapper">
+
+    <!-- START Navbar -->
+    {% include 'customer\layouts\navbar.html' %}
+    <!-- END Navbar -->
+
+    <!-- Hero slider -->
+    <section class="tns-carousel-wrapper tns-controls-onhover">
+    <div class="tns-carousel-inner" data-carousel-options='{
+        "mode": "gallery",
+        "navContainer": "#pager",
+        "responsive": {
+        "0": { "controls": false },
+        "991": { "controls": true }
+        }
+    }'>
+
+        <!-- Slide 1 -->
+        <div class="bg-size-cover py-xl-6" style="background-image: url({% static 'customer/img/ecommerce/home/hero-slider/image5.jpg' %});">
+        <div class="container pt-5 pb-6">
+            <div class="row pb-lg-6">
+            <div class="col-lg-6 offset-lg-1 offset-xl-0 pb-4 pb-md-6">
+                <h3 class="fs-lg text-uppercase from-start delay-1 text-white">New In</h3>
+                <h2 class="display-2 mb-lg-5 pb-3 from-start text-white">Books 2021</h2>
+                
+            </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="bg-size-cover py-xl-6" style="background-image: url({% static 'customer/img/ecommerce/home/hero-slider/image6.jpg' %});">
+        <div class="container pt-5 pb-6">
+            <div class="row pb-lg-6">
+            <div class="col-lg-6 offset-lg-1 offset-xl-0 pb-4 pb-md-6">
+                <h3 class="fs-lg text-uppercase from-top delay-1 text-white">New Collection</h3>
+                <h2 class="display-2 mb-lg-5 pb-3 scale-down text-white">New Arival 2021</h2>
+                
+            </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="bg-size-cover py-xl-6" style="background-image: url({% static 'customer/img/ecommerce/home/hero-slider/image7.jpg' %});">
+        <div class="container pt-5 pb-6">
+            <div class="row pb-lg-6">
+            <div class="col-lg-6 offset-lg-1 offset-xl-0 pb-4 pb-md-6">
+                <h3 class="fs-lg text-uppercase from-start delay-1 text-white">Limited Edition</h3>
+                <h2 class="display-2 mb-lg-5 pb-3 from-start text-white">Books Issue</h2>
+               
+            </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="bg-size-cover py-xl-6" style="background-image: url({% static 'customer/img/ecommerce/home/hero-slider/image8.jpg' %});">
+        <div class="container pt-5 pb-6">
+            <div class="row pb-lg-6">
+            <div class="col-lg-6 offset-lg-1 offset-xl-0 pb-4 pb-md-6">
+                <h3 class="fs-lg text-uppercase from-top delay-1 text-white">Lowest Prices</h3>
+                <h2 class="display-2 mb-lg-5 pb-3 scale-down text-white">New Book Sales</h2>
+                <div class="mb-4 scale-down delay-2">
+                <a href="{% url 'add_products' %}" class="btn btn-outline-primary btn-lg">Shop sale now</a>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Pager -->
+    <div class="container position-relative">
+        <div class="row mt-lg-n5">
+        <div class="col-lg-7 col-md-8 col-sm-10 offset-lg-1 offset-xl-0">
+            <div class="position-relative">
+            <div id="pager" class="tns-pager text-white tns-pager-inverse mb-xl-5 pb-5 pb-md-6">
+                <button type="button" class="text-white" data-nav="0">01</button>
+                <button type="button" class="text-white" data-nav="1">02</button>
+                <button type="button" class="text-white" data-nav="2">03</button>
+                <button type="button" class="text-white" data-nav="3">04</button>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    </section>
+
+
+    <!-- Top categories -->
+    <section class="container pt-5 pt-lg-0">
+    <div class="tns-carousel-wrapper tns-nav-outside">
+        <div class="tns-carousel-inner" data-carousel-options='{
+        "controls": false,
+        "responsive": {
+            "0": {
+            "gutter": 20
+            },
+            "400": {
+            "items": 2,
+            "gutter": 20
+            },
+            "520": {
+            "gutter": 30
+            },
+            "768": {
+            "items": 3,
+            "gutter": 30
+            }
+        }
+        }'>
+
+        {
+            <!-- Category -->
+       
+        <!-- Category -->
+       {% comment %} <a class="d-block image-scale heading-highlight text-center">
+            <div class="image-inner mb-3 rounded">
+                
+            <img src="{% static 'customer/img/ecommerce/home/categories/book1.jpg' %}">
+            </div>
+            <h3 class="h5 mb-1">Women’s</h3>
+        </a> {% endcomment %}
+    
+        <!-- Category -->
+        {% comment %} <a class="d-block image-scale heading-highlight text-center">
+            <div class="image-inner mb-3 rounded">
+            <img src="{% static 'customer/img/ecommerce/home/categories/book2.jpg' %}">
+            </div>
+            <h3 class="h5 mb-1">Men’s</h3>
+        </a> {% endcomment %}
+        <!-- Category -->
+        {% comment %} <a class="d-block image-scale heading-highlight text-center">
+            <div class="image-inner mb-3 rounded">
+            <img src="{% static 'customer/img/ecommerce/home/categories/book3.jpg' %}" >
+            </div>
+            <h3 class="h5 mb-1">Kids'</h3>
+        </a>
+         {% endcomment %}
+        </div>
+    </div>
+    </section>
+
+
+    <!-- New arrivals -->
+    <section class="container-fluid px-xl-grid-gutter mt-3 mb-2 mb-sm-4 mb-lg-5 py-5" >
+    <div class="text-center mb-5 pb-2">
+        <h2 class="h1">New arrivals</h2>
+    </div>
+
+    <!-- Product carousel -->
+    <div class="tns-carousel-wrapper tns-nav-outside">
+        <div class="tns-carousel-inner" data-carousel-options='{
+        "controls": false,
+        "responsive": {
+            "0": {
+            "items": 1,
+            "gutter": 20
+            },
+            "420": {
+            "items": 2,
+            "gutter": 20
+            },
+            "600": {
+            "items": 3,
+            "gutter": 20
+            },
+            "700": {
+            "items": 3,
+            "gutter": 30
+            },
+            "900": {
+            "items": 4,
+            "gutter": 30
+            },
+            "1200": {
+            "items": 5,
+            "gutter": 30
+            },
+            "1400": {
+            "items": 6,
+            "gutter": 30
+            }
+        }
+        }'>
+
+            <!-- Item -->
+            {% for new_prod in new_arrivals %}
+            <!-- Item -->
+            <div>
+                <div class="card card-product">
+                <div class="card-product-img">
+                    <a href="{% url 'customer_product_details' new_prod.id %}" class="card-img-top">
+                    <img src="{{new_prod.image.url}}" alt="Product image" style="width:250px; height:230px;">
+                    </a>
+                    
+                    
+                </div>
+                <div class="card-body">
+                    <h3 class="card-product-title text-truncate mb-2">
+                    <a href="{% url 'customer_product_details' new_prod.id %}" class="nav-link">{{new_prod.product_name}}</a>
+                    </h3>
+                    <div class="d-flex align-items-center">
+                    <span class="h5 d-inline-block mb-0">&#x20B9;{{new_prod.price}}</span>
+                    </div>
+                </div>
+                </div>
+            </div>
+        {% endfor %}
+        
+        </div>
+    </div>
+    </section>
+
+
+
+
+    <!-- Popular categories -->
+{% comment %}   {% endcomment %}
+
+
+    <!-- Trending products (carousel) -->
+    
+    
+
+
+    
+
+    <!-- Services -->
+    <section class="container pt-5 pb-2 pb-sm-5 py-md-5 py-lg-6">
+    <div class="row g-0 py-3">
+        <div class="col-sm-6 col-md-3 text-center mb-md-0 mb-4 pb-md-0 pb-3">
+        <img class="mb-4" src="{% static 'customer/img/ecommerce/home/services/delivery.svg' %}" width="48" alt="Worldwide Shipping">
+        <h5 class="h5 mb-2">Fast Worldwide Shipping</h5>
+        <p class="mb-0 text-muted">Get free shipping over $250</p>
+        </div>
+        <span class="divider-vertical d-sm-block d-none"></span>
+        <div class="col-sm-6 col-md-3 text-center mb-md-0 mb-4 pb-md-0 pb-3">
+        <img class="mb-4" src="{% static 'customer/img/ecommerce/home/services/support.svg' %}" width="48" alt="Customer Support">
+        <h5 class="h5 mb-2">24/7 Customer Support</h5>
+        <p class="mb-0 text-muted">Friendly 24/7 customer support</p>
+        </div>
+        <span class="divider-vertical d-sm-block d-none"></span>
+        <div class="col-sm-6 col-md-3 text-center mb-md-0 mb-4 pb-md-0 pb-3">
+        <img class="mb-4" src="{% static 'customer/img/ecommerce/home/services/guarantee.svg' %}" width="48" alt="Customer Support">
+        <h5 class="h5 mb-2">Money Back Guarantee</h5>
+        <p class="mb-0 text-muted">We return money within 30 days</p>
+        </div>
+        <span class="divider-vertical d-sm-block d-none"></span>
+        <div class="col-sm-6 col-md-3 text-center mb-md-0 mb-4 pb-md-0 pb-3">
+        <img class="mb-4" src="{% static 'customer/img/ecommerce/home/services/payment.svg' %}" width="48" alt="Customer Support">
+        <h5 class="h5 mb-2">Secure Online Payment</h5>
+        <p class="mb-0 text-muted">Accept all major credit cards</p>
+        </div>
+    </div>
+    </section>
+
+
+
+    <!-- Insagram -->
+      {% comment %} <section class="pt-5 pb-4 pt-lg-6 pb-lg-5 border-top border-bottom" >
+        <div class="container pt-md-4 pb-2 pt-lg-0 pb-lg-0">
+          <div class="row">
+            <div class="col-md-4 text-center text-md-start pb-2 pb-md-0 mb-4 mb-md-0">
+              <p class="text-dark text-uppercase mb-2">Follow us on Instagram</p>
+              <h2 class="h1 pb-2 pb-md-3">@Online_cloth</h2>
+            </div>
+            <div class="col-md-8">
+              <div class="tns-carousel-wrapper tns-nav-outside">
+                <div class="tns-carousel-inner" data-carousel-options='{
+                  "controls": false,
+                  "gutter": 15,
+                  "responsive": {
+                    "0": { "items": 2 },
+                    "500": { "items": 3 },
+                    "1200": { "items": 3 }
+                  }
+                }'>
+                  <!-- Image -->
+                  <div>
+                    <img src="{% static 'customer/img/ecommerce/home/instagram/01.jpg' %}" alt="Image">
+                  </div>
+                  <!-- Image -->
+                  <div>
+                    <img src="{% static 'customer/img/ecommerce/home/instagram/02.jpg' %}" alt="Image">
+                  </div>
+                  <!-- Image -->
+                  <div>
+                    <img src="{% static 'customer/img/ecommerce/home/instagram/03.jpg' %}" alt="Image">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> {% endcomment %}
+
+
+    
+
+
+    <!-- Brands -->
+    {% comment %} <section class="container pt-6 pb-5 mb-3 pb-lg-6">
+    <div class="tns-carousel-wrapper">
+        <div class="tns-carousel-inner" data-carousel-options='{
+        "nav": false,
+        "controls": false,
+        "autoplay": true,
+        "autoplayTimeout": 4000,
+        "responsive": {
+            "0": {
+            "items": 2
+            },
+            "576": {
+            "items": 3
+            },
+            "768": {
+            "items": 4
+            },
+            "992": {
+            "items": 5
+            },
+            "1200": {
+            "items": 6
+            }
+        }
+        }'>
+        <div class="px-3 text-center">
+            <a href="#" class="swap-image">
+            <img src="{% static 'customer/img/ecommerce/home/brands/vans.svg' %}" class="swap-to" width="120" alt="Brand logo hover">
+            <img src="{% static 'customer/img/ecommerce/home/brands/vans-g.svg' %}" class="swap-from" width="120" alt="Brand logo">
+            </a>
+        </div>
+        <div class="px-3 text-center">
+            <a href="#" class="swap-image">
+            <img src="{% static 'customer/img/ecommerce/home/brands/diesel.svg' %}" class="swap-to" width="120" alt="Brand logo hover">
+            <img src="{% static 'customer/img/ecommerce/home/brands/diesel-g.svg' %}" class="swap-from" width="120" alt="Brand logo">
+            </a>
+        </div>
+        <div class="px-3 text-center">
+            <a href="#" class="swap-image">
+            <img src="{% static 'customer/img/ecommerce/home/brands/under-armour.svg' %}" class="swap-to" width="120" alt="Brand logo hover">
+            <img src="{% static 'customer/img/ecommerce/home/brands/under-armour-g.svg' %}" class="swap-from" width="120" alt="Brand logo">
+            </a>
+        </div>
+        <div class="px-3 text-center">
+            <a href="#" class="swap-image">
+            <img src="{% static 'customer/img/ecommerce/home/brands/columbia.svg' %}" class="swap-to" width="120" alt="Brand logo hover">
+            <img src="{% static 'customer/img/ecommerce/home/brands/columbia-g.svg' %}" class="swap-from" width="120" alt="Brand logo">
+            </a>
+        </div>
+        <div class="px-3 text-center">
+            <a href="#" class="swap-image">
+            <img src="{% static 'customer/img/ecommerce/home/brands/levis.svg' %}" class="swap-to" width="120" alt="Brand logo hover">
+            <img src="{% static 'customer/img/ecommerce/home/brands/levis-g.svg' %}" class="swap-from" width="120" alt="Brand logo">
+            </a>
+        </div>
+        <div class="px-3 text-center">
+            <a href="#" class="swap-image">
+            <img src="{% static 'customer/img/ecommerce/home/brands/mango.svg' %}" class="swap-to" width="120" alt="Brand logo hover">
+            <img src="{% static 'customer/img/ecommerce/home/brands/mango-g.svg' %}" class="swap-from" width="120" alt="Brand logo">
+            </a>
+        </div>
+        </div>
+    </div>
+    </section> {% endcomment %}
+
+
+
+</main>
+
+{% endblock content %}

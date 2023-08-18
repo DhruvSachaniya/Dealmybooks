@@ -1,0 +1,121 @@
+{% extends 'admin/layouts/base.html' %}
+{% load static %}
+{% block title %}Admin Profile{% endblock title %}
+{% block content %}
+	<main class="content">
+		<div class="container-fluid p-0">
+
+			<h1 class="h3 mb-3">Admin Profile</h1>
+
+			<div class="row mt-2">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Admin Profile</h5>
+                </div>
+                <div class="card-body">
+                    <form action="" method="POST" enctype="multipart/form-data" novalidate>
+                        {% csrf_token %}
+
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="mb-3">
+                                    <label class="form-label">Username</label>
+                                    <input type="text" class="form-control" name="uname" placeholder="Name" required>
+                    
+                                        <label class="small text-danger"></label>
+                                
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input type="text" class="form-control" name="uname" placeholder="Email" required>
+                                 
+                                        <label class="small text-danger"></label>
+                                  
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Contact Number</label>
+                                    <input type="number" class="form-control" name="uname" placeholder="Contact Number" required>
+                                   
+                                        <label class="small text-danger"></label>
+                                  
+                                </div>
+                            </div>
+                            
+                            <div class="col text-center mx-auto my-auto">
+                                <div class="text-center">
+                                    <img src="{% static 'myadmin/img/avatars/avatar.jpg' %}" alt="..." id="file-ip-preview" class="rounded-circle img-responsive mt-2" width="128" height="128">
+                                </div>
+                                <div class="mt-2">
+                                    <label for="admin_image_upload">
+                                        <span class="btn btn-primary mt-2"><i class="fas fa-upload"></i> Upload</span>
+                                    </label>
+                                    <input type="file" id='admin_image_upload' class="btn btn-primary d-none" name="uname" onchange='showPreview(event)'>
+                                  
+                                        <label class="small text-danger"></label>
+                                    
+                                </div>
+                            </div>
+
+                        </div>
+                        
+                        
+                        
+                        
+                    
+                        <div class="row">
+                            <div class="mb-3 col-md-6">
+                                <label class="form-label">City</label>
+                                <input type="text" class="form-control" name="uname" placeholder="City" required>
+                               
+                                    <label class="small text-danger"></label>
+                              
+                            </div>
+                            <div class="mb-3 col-md-4">
+                                <label class="form-label">State</label>
+                                <input type="text" class="form-control" name="uname" placeholder="State" required>
+                                
+                                    <label class="small text-danger"></label>
+                            
+                            </div>
+                            <div class="mb-3 col-md-2">
+                                <label class="form-label">Zip</label>
+                                <input type="number" class="form-control" name="uname" placeholder="Zipcode" required>
+                               
+                                    <label class="small text-danger"></label>
+                             
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-sm-6">
+                                <button type="submit" class="btn btn-primary">Save changes</button>    
+                            </div>
+                            <div class="col-sm-5" style="text-align:right;"> 
+                                <a href="" class="text-info fw-bold fs-lg">Change Password?</a>
+                            </div>
+                        </div>
+
+                        
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+		</div>
+	</main>
+{% endblock content %}
+{% block scripts %}
+    <script>
+        function showPreview(event){
+        if(event.target.files.length > 0) {
+            var src = URL.createObjectURL(event.target.files[0]);
+            var preview = document.getElementById('file-ip-preview');
+            preview.src = src;
+        }
+        }
+  </script>
+{% endblock scripts %}
